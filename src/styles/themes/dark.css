@@ -1,0 +1,27 @@
+/* Dark theme raw token values — KhiemX is dark-only, so these override the light :root tokens. */
+:root {
+    color-scheme: dark;
+    --background: #0f0f0f;
+    --foreground: #ffffff;
+    --card: #0f0f0f;
+    --card-foreground: #ffffff;
+    --popover: #161616;
+    --popover-foreground: #ffffff;
+    --primary: #ffffff;
+    --primary-foreground: #0f0f0f;
+    --secondary: #323232;
+    --secondary-foreground: #ffffff;
+    --muted: #1a1a1a;
+    --muted-foreground: #9f9f9f;
+    --accent: #1f1f1f;
+    --accent-foreground: #ffffff;
+    --border: rgb(255 255 255 / 0.1);
+    --input: rgb(255 255 255 / 0.12);
+    --ring: #5b78f6;
+
+    /* KhiemX brand tokens */
+    --brand: #5b78f6;
+    --brand-soft: #c2ebff;
+    --text-dim: #676767;
+    --text-label: #bcbcbc;
+}

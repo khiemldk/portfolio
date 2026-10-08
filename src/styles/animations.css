@@ -1,0 +1,57 @@
+/* Keyframes + custom animations.
+ * Tailwind animations provided by tailwindcss-animate plugin (see globals.css).
+ */
+
+/* Infinite marquee: track holds two identical groups, so -50% loops seamlessly */
+@keyframes kx-marquee {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+@keyframes kx-float {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(0, -8px, 0);
+    }
+}
+
+@keyframes kx-shine {
+    from {
+        transform: translateX(-120%) skewX(-18deg);
+    }
+    to {
+        transform: translateX(260%) skewX(-18deg);
+    }
+}
+
+@keyframes kx-pulse-ring {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+.kx-marquee-track {
+    animation: kx-marquee 28s linear infinite;
+    will-change: transform;
+}
+.kx-marquee:hover .kx-marquee-track {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kx-marquee-track {
+        animation: none;
+    }
+}

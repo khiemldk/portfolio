@@ -1,0 +1,84 @@
+/* Bento card surface — gradient hairline border + cursor spotlight.
+ * --mx / --my are written by <BentoCard /> on pointermove (no React re-render).
+ */
+.kx-card {
+    --mx: 50%;
+    --my: 0%;
+    position: relative;
+    isolation: isolate;
+    border-radius: 30px;
+    background: var(--card);
+    transition:
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.5s ease;
+}
+
+/* Soft fill: static diagonal sheen + spotlight that follows the cursor */
+.kx-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+        radial-gradient(520px circle at var(--mx) var(--my), rgb(255 255 255 / 0.07), transparent 45%),
+        linear-gradient(120deg, rgb(255 255 255 / 0.075), rgb(255 255 255 / 0.012));
+}
+
+/* Hairline border (masked ring) — brightens in brand colour near the cursor */
+.kx-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    padding: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+        radial-gradient(260px circle at var(--mx) var(--my), rgb(91 120 246 / 0), rgb(91 120 246 / 0) 100%),
+        linear-gradient(120deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0.01));
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#000 0 0) content-box exclude,
+        linear-gradient(#000 0 0);
+    transition: background 0.4s ease;
+}
+
+@media (hover: hover) {
+    .kx-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 60px -24px rgb(91 120 246 / 0.28);
+    }
+    .kx-card:hover::after {
+        background:
+            radial-gradient(260px circle at var(--mx) var(--my), rgb(91 120 246 / 0.9), rgb(91 120 246 / 0) 100%),
+            linear-gradient(120deg, rgb(255 255 255 / 0.2), rgb(255 255 255 / 0.03));
+    }
+}
+
+/* Corner arrow button fades in on card hover */
+.kx-card .kx-corner {
+    opacity: 0.25;
+    rotate: 45deg; /* resting: arrow points right */
+    transition:
+        opacity 0.3s ease,
+        rotate 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        scale 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.kx-card:hover .kx-corner {
+    opacity: 1;
+    rotate: 0deg; /* hover: arrow tips up-right */
+    scale: 1.08;
+}
+
+.kx-label {
+    color: var(--text-label);
+    opacity: 0.55;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
